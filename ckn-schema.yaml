@@ -1,0 +1,223 @@
+name: nlm-ckn-schema
+description: Data model for cell phenotypes and biological entities they relate to.
+id: https://w3id.org/nlm-ckn-schema
+
+imports:
+    - linkml:types
+
+prefixes:
+    linkml: https://w3id.org/linkml/
+    nlm-ckn: https://w3id.org/nlm-ckn-schema
+    xsd: http://www.w3.org/2001/XMLSchema#
+
+default_prefix: nlm-ckn
+
+types:
+    
+    doi:
+        typeof: uriorcurie
+    
+    https identifier:
+        typeof: string
+
+slots:
+  
+    assay:
+        examples:
+            - value: EFO:0009899
+        range: uriorcurie
+  
+    cell_type:
+        examples:
+            - value: CL:0000095
+        range: uriorcurie
+  
+    developmental_stage:
+        examples:
+            - value: MmusDv:0000136
+        range: uriorcurie
+  
+    disease:
+        examples:
+            - value: MONDO:0005812
+        range: uriorcurie
+  
+    anatomical_structure:
+        examples:
+            - value: UBERON:0000006
+        range: uriorcurie
+  
+    species:
+        examples:
+            - value: NCBITaxon:10090
+        range: uriorcurie
+  
+    publication:
+        examples:
+            - value: https://doi.org/10.1101/2025.01.17.633590
+        range: doi
+  
+    dataset:
+        examples:
+            - value: e51bae9a-c747-4b64-904a-4da7cda218ab
+        range: string
+  
+    organism_traits:
+        examples:
+            - value: PATO:0000384
+        range: uriorcurie
+  
+    cell_set:
+        examples:
+            - value: CSD/6A4C73F6-79D9-4FBE-BDBD-58FCFC108B15
+        range: string
+  
+    cell_count:
+        examples:
+            - value: '31497'
+        range: integer
+  
+    biological_process:
+        examples:
+            - value: GO:0040016
+        range: uriorcurie
+  
+    cellular_component:
+        examples:
+            - value: GO:0044432
+        range: uriorcurie
+  
+    protein:
+        examples:
+            - value: PR:000003246
+        range: uriorcurie
+  
+    molecular_function:
+        examples:
+            - value: GO:0016218
+        range: uriorcurie
+  
+    gene:
+        examples:
+            - value: HSPA1B
+        identifier: true
+        range: string
+  
+    mutation:
+        examples:
+            - value: RS/2070673
+        range: string
+  
+    variant_consequence:
+        examples:
+            - value: SO:0000436
+        range: uriorcurie
+  
+    biomarker_combination:
+        examples:
+            - value: '[CCL21]'
+        range: string
+  
+    binary_gene_combination:
+        examples:
+            - value: '[TM4SF18, VPS35L, CCL21, MMRN1, SNCG, PPFIBP1, NRP2, AKAP12, PDPN, GNG11]'
+        range: string
+  
+    bag_of_genes:
+        examples:
+            - value: '[CCL21, PKHD1L1, SEMA3D, LYVE1, SEMA3A, PROX1, MMRN1, PPFIBP1, AKAP12, PDPN]'
+        range: string
+  
+    drug_product:
+        examples:
+            - value: CHEMBL26
+        identifier: true
+        range: string
+  
+    clinical_trial:
+        examples:
+            - value: NCT00494511
+        range: string
+
+classes:
+  
+    CellSet:
+        slots:
+            - assay
+            - cell_type
+            - developmental_stage
+            - disease
+            - anatomical_structure
+            - species
+            - publication
+            - dataset
+            - organism_traits
+            - cell_set
+            - cell_count
+            - biomarker_combination
+            - binary_gene_combination
+            - bag_of_genes
+            - gene
+        unique_keys:
+            cell_type_key:
+                unique_key_name: cell_type_key
+                unique_key_slots:
+                    - cell_type
+            cell_set_key:
+                unique_key_name: cell_set_key
+                unique_key_slots:
+                    - cell_set
+  
+    CellType:
+        slots:
+            - cell_type
+            - biological_process
+            - cellular_component
+            - protein
+            - molecular_function
+        unique_keys:
+            biological_process_key:
+                unique_key_name: biological_process_key
+                unique_key_slots:
+                    - biological_process
+            cellular_component_key:
+                unique_key_name: cellular_component_key
+                unique_key_slots:
+                    - cellular_component
+            protein_key:
+                unique_key_name: protein_key
+                unique_key_slots:
+                    - protein
+            molecular_function_key:
+                unique_key_name: molecular_function_key
+                unique_key_slots:
+                    - molecular_function
+  
+    Gene:
+        slots:
+            - gene
+            - disease
+            - mutation
+            - variant_consequence
+            - anatomical_structure
+        unique_keys:
+            mutation_key:
+                unique_key_name: mutation_key
+                unique_key_slots:
+                    - mutation
+  
+    Drug:
+        slots:
+            - drug_product
+            - disease
+            - clinical_trial
+            - protein
+        unique_keys:
+            clinical_trial_key:
+                unique_key_name: clinical_trial_key
+                unique_key_slots:
+                    - clinical_trial
+            protein_key:
+                unique_key_name: protein_key
+                unique_key_slots:
+                    - protein
