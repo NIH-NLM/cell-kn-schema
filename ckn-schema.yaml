@@ -9,6 +9,21 @@ prefixes:
     linkml: https://w3id.org/linkml/
     nlm-ckn: https://w3id.org/nlm-ckn-schema
     xsd: http://www.w3.org/2001/XMLSchema#
+    CL: https://purl.obolibrary.org/obo/CL_
+    SO: https://purl.obolibrary.org/obo/SO_
+    UBERON: https://purl.obolibrary.org/obo/UBERON_
+    DRON: https://purl.obolibrary.org/obo/DRON_
+    NCBITaxon: https://purl.obolibrary.org/obo/NCBITaxon_
+    OBI: https://purl.obolibrary.org/obo/OBI_
+    PATO: https://purl.obolibrary.org/obo/PATO_
+    IAO: https://purl.obolibrary.org/obo/IAO_
+    GO: https://purl.obolibrary.org/obo/GO_
+    CHEBI: https://purl.obolibrary.org/obo/CHEBI_
+    MONDO: https://purl.obolibrary.org/obo/MONDO_
+    PR: https://purl.obolibrary.org/obo/PR_
+    HP: https://purl.obolibrary.org/obo/HP_
+    HsapDv: https://purl.obolibrary.org/obo/HsapDv_
+    OPMI: https://purl.obolibrary.org/obo/OPMI_
 
 default_prefix: nlm-ckn
 
@@ -22,119 +37,162 @@ types:
 
 slots:
   
-    assay:
+    assay_type:
+        description: "A planned process that has the objective to produce information about a material entity (the evaluant) by examining it."
+        slot_uri: OBI:0000070
         examples:
             - value: EFO:0009899
         range: uriorcurie
   
     cell_type:
+        description: "A material entity of anatomical origin (part of or deriving from an organism) that has as its parts a maximally connected cell compartment surrounded by a plasma membrane."
+        slot_uri: CL:0000000
         examples:
             - value: CL:0000095
         range: uriorcurie
   
-    developmental_stage:
+    developmental_stage_type:
+        description: 
+        slot_uri: 
         examples:
             - value: MmusDv:0000136
         range: uriorcurie
   
-    disease:
+    disease_purl:
+        description: 
+        slot_uri:
         examples:
             - value: MONDO:0005812
         range: uriorcurie
   
-    anatomical_structure:
+    anatomical_structure_purl:
+        description: 
+        slot_uri:
         examples:
             - value: UBERON:0000006
         range: uriorcurie
   
-    species:
+    species_purl:
+        description: 
+        slot_uri:
         examples:
             - value: NCBITaxon:10090
         range: uriorcurie
   
     publication:
+        description: 
+        slot_uri:
         examples:
             - value: https://doi.org/10.1101/2025.01.17.633590
         range: doi
   
     dataset:
+        description: 
+        slot_uri:
         examples:
             - value: e51bae9a-c747-4b64-904a-4da7cda218ab
         range: string
   
-    organism_traits:
+    organism_traits_purl:
+        description: 
+        slot_uri:
         examples:
             - value: PATO:0000384
         range: uriorcurie
   
     cell_set:
+        description: A collection of cells that have some common property.
+        slot_uri:
         examples:
             - value: CSD/6A4C73F6-79D9-4FBE-BDBD-58FCFC108B15
         range: string
   
     cell_count:
+        description: A count of all cells within a material entity.
+        slot_uri:
         examples:
             - value: '31497'
         range: integer
   
-    biological_process:
+    biological_process_purl:
+        description: 
+        slot_uri:
         examples:
             - value: GO:0040016
         range: uriorcurie
   
-    cellular_component:
+    cellular_component_purl:
+        description: 
+        slot_uri:
         examples:
             - value: GO:0044432
         range: uriorcurie
   
-    protein:
+    protein_purl:
+        description: 
+        slot_uri:
         examples:
             - value: PR:000003246
         range: uriorcurie
   
-    molecular_function:
+    molecular_function_purl:
+        description: 
+        slot_uri:
         examples:
             - value: GO:0016218
         range: uriorcurie
   
-    gene:
+    gene_id:
+        description: An identifier for a gene.
+        slot_uri:
         examples:
             - value: HSPA1B
         identifier: true
         range: string
   
-    mutation:
+    mutation_id:
+        description: An identifier for a single nucleotide polymorphism.
         examples:
             - value: RS/2070673
         range: string
   
-    variant_consequence:
+    variant_consequence_purl:
+        description: 
+        slot_uri:
         examples:
             - value: SO:0000436
         range: uriorcurie
   
     biomarker_combination:
+        description: A collection of biological entities that together can be used to identify some entity.
+        slot_uri:
         examples:
             - value: '[CCL21]'
         range: string
   
     binary_gene_combination:
+        description: A collection of genes that are highly expresssed in an instance of some entity (e.g., cell).
         examples:
             - value: '[TM4SF18, VPS35L, CCL21, MMRN1, SNCG, PPFIBP1, NRP2, AKAP12, PDPN, GNG11]'
         range: string
   
     bag_of_genes:
+        description: A collection of genes that are associated with an instance of some entity (e.g., cell).
         examples:
             - value: '[CCL21, PKHD1L1, SEMA3D, LYVE1, SEMA3A, PROX1, MMRN1, PPFIBP1, AKAP12, PDPN]'
         range: string
   
     drug_product:
+        description: 
+        slot_uri:
         examples:
             - value: CHEMBL26
         identifier: true
         range: string
   
     clinical_trial:
+        description: 
+        slot_uri:
         examples:
             - value: NCT00494511
         range: string
@@ -142,6 +200,7 @@ slots:
 classes:
   
     CellSet:
+        description: A collection of cells that have some common property.
         slots:
             - assay
             - cell_type
@@ -158,66 +217,186 @@ classes:
             - binary_gene_combination
             - bag_of_genes
             - gene
-        unique_keys:
-            cell_type_key:
-                unique_key_name: cell_type_key
-                unique_key_slots:
-                    - cell_type
-            cell_set_key:
-                unique_key_name: cell_set_key
-                unique_key_slots:
-                    - cell_set
   
     CellType:
+        description: "A material entity of anatomical origin (part of or deriving from an organism) that has as its parts a maximally connected cell compartment surrounded by a plasma membrane."
+        class_uri: CL:0000000
         slots:
             - cell_type
             - biological_process
             - cellular_component
             - protein
             - molecular_function
-        unique_keys:
-            biological_process_key:
-                unique_key_name: biological_process_key
-                unique_key_slots:
-                    - biological_process
-            cellular_component_key:
-                unique_key_name: cellular_component_key
-                unique_key_slots:
-                    - cellular_component
-            protein_key:
-                unique_key_name: protein_key
-                unique_key_slots:
-                    - protein
-            molecular_function_key:
-                unique_key_name: molecular_function_key
-                unique_key_slots:
-                    - molecular_function
   
     Gene:
+        description: "A region (or regions) that includes all of the sequence elements necessary to encode a functional transcript. A gene may include regulatory regions, transcribed regions and/or other functional sequence regions."
+        class_uri: SO:0000704
         slots:
             - gene
             - disease
             - mutation
             - variant_consequence
             - anatomical_structure
-        unique_keys:
-            mutation_key:
-                unique_key_name: mutation_key
-                unique_key_slots:
-                    - mutation
   
     Drug:
+        description: "A drug product that is bearer of a clinical drug role."
+        class_uri: DRON:00000005
         slots:
             - drug_product
             - disease
             - clinical_trial
             - protein
-        unique_keys:
-            clinical_trial_key:
-                unique_key_name: clinical_trial_key
-                unique_key_slots:
-                    - clinical_trial
-            protein_key:
-                unique_key_name: protein_key
-                unique_key_slots:
-                    - protein
+
+    AnatomicalStructure:
+        description: "Material anatomical entity that is a single connected structure with inherent 3D shape generated by coordinated expression of the organism's own genome."
+        class_uri: UBERON:0001062
+        slots:
+            #- exact_synonym
+            #- related_synonym
+            #- broad_synonym
+            - ontology_purl
+            - depiction
+
+    Species:
+        description: "The taxonomical classification of an organism."
+        class_uri: NCBITaxon:131567
+        slots:
+            - ontology_purl
+
+    OrganismTrait:
+        description: "A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities."
+        class_uri: PATO:0000001
+        slots:
+            - ontology_purl
+
+    Assay:
+        description: "A planned process that has the objective to produce information about a material entity (the evaluant) by examining it."
+        class_uri: OBI:0000070
+        slots:
+            - ontology_purl
+
+    Dataset:
+        description: "A data item that is an aggregate of other data items of the same type that have something in common. Averages and distributions can be determined for data sets."
+        class_uri: IAO:0000100
+        slots:
+            - identifier
+            - version
+            - collection_version
+
+    Publication:
+        description: "A document that is the output of a publishing process."
+        class_uri: IAO:0000311
+        slots:
+            - year
+            - title
+            - author_list
+            - pmcid
+            - pmid
+            - journal
+            - citation
+
+    BiologicalProcess:
+        description: "A biological process is the execution of a genetically-encoded biological module or program. It consists of all the steps required to achieve the specific biological objective of the module. A biological process is accomplished by a particular set of molecular functions carried out by specific gene products (or macromolecular complexes), often in a highly regulated manner and in a particular temporal sequence."
+        class_uri: GO:0008150
+        slots:
+            - ontology_purl
+
+    MolecularFunction:
+        description: "A molecular process that can be carried out by the action of a single macromolecular machine, usually via direct physical interactions with other molecular entities. Function in this sense denotes an action, or activity, that a gene product (or a complex) performs."
+        class_uri: GO:0003674
+        slots:
+            - ontology_purl
+
+    CellularComponent:
+        description: "A location, relative to cellular compartments and structures, occupied by a macromolecular machine."
+        class_uri: GO:0005575
+        slots:
+            - ontology_purl
+
+    #Transcript:
+        #description: 
+        #class_uri:
+        #slots:
+        #    - 
+
+    BiomarkerCombination:
+        description: "A collection of discontinuous sequences."
+        class_uri: SO:0001260
+        slots:
+            - markers
+
+    #OpenChromatinRegion:
+        #description: "A region of a chromosome where regulatory events occur, including epigenetic modifications. These epigenetic modifications can include nucleosome modifications and post-replicational DNA modifications."
+        #class_uri: SO:0002306
+        #slots:
+        #    - 
+
+    Protein:
+        description: "An amino acid chain that is canonically produced de novo by ribosome-mediated translation of a genetically-encoded mRNA, and any derivatives thereof."
+        class_uri: PR:000000001
+        slots:
+            - comment
+            - recommended_name
+            - exact_synonym
+
+    Disease:
+        description: "A disease is a disposition to undergo pathological processes that exists in an organism because of one or more disorders in that organism."
+        class_uri: MONDO:0000001
+        slots:
+            - label
+            - definition
+            - source
+            - ontology_purl
+            - database_cross_reference
+
+    #Peptide:
+        #description: "Amide derived from two or more amino carboxylic acid molecules (the same or different) by formation of a covalent bond from the carbonyl carbon of one to the nitrogen atom of another with formal loss of water. The term is usually applied to structures formed from alpha-amino acids, but it includes those derived from any amino carboxylic acid. X = OH, OR, NH2, NHR, etc."
+        #class_uri: CHEBI:16670
+        #slots:
+        #    - 
+
+    SignOrSymptom:
+        description: "A symptom or manifestation indicating a systemic or general effect of a disease and that may affect the general well-being or status of an individual."
+        class_uri: HP:0025142
+        slots:
+            - label
+            - ontology_purl
+
+    DevelopmentalStage:
+        description: "A spatiotemporal region encompassing some part of the life cycle of an organism."
+        class_uri: UBERON:0000105
+        slots:
+            - label
+            - ontology_purl
+
+    #Study:
+        #description: "A planned process that consists of parts: planning, study design execution, documentation and which produce conclusion(s)."
+        #class_uri: OBI:0000066
+        #slots:
+        #    - 
+
+    #Mutation:
+        #description: "A sequence_variant is a non exact copy of a sequence_feature or genome exhibiting one or more sequence_alteration."
+        #class_uri: SO:0001060
+        #slots:
+        #    - 
+
+    #VariantConsequence:
+        #description: "A sequence_alteration is a sequence_feature whose extent is the deviation from another sequence."
+        #class_uri: SO:0001059
+        #slots:
+        #    - 
+
+    #BinaryGeneCombination:
+        #description: "A collection of discontinuous sequences."
+        #class_uri: SO:0001260
+        #slots:
+        #    - 
+
+    #BagOfGenes:
+        #description:
+        #class_uri:
+        #slots:
+        #    - 
+
+    
