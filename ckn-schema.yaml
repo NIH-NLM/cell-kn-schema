@@ -24,6 +24,9 @@ prefixes:
     HP: https://purl.obolibrary.org/obo/HP_
     HsapDv: https://purl.obolibrary.org/obo/HsapDv_
     OPMI: https://purl.obolibrary.org/obo/OPMI_
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    obo: http://www.geneontology.org/formats/oboInOwl#
+    foaf: http://xmlns.com/foaf/0.1/
 
 default_prefix: nlm-ckn
 
@@ -79,15 +82,15 @@ slots:
             - value: NCBITaxon:10090
         range: uriorcurie
   
-    publication:
-        description: 
-        slot_uri:
+    publication_id:
+        description: An identifier for a scientific publication.
+        slot_uri: 
         examples:
             - value: https://doi.org/10.1101/2025.01.17.633590
         range: doi
   
-    dataset:
-        description: 
+    dataset_id:
+        description: An identifier for a data set.
         slot_uri:
         examples:
             - value: e51bae9a-c747-4b64-904a-4da7cda218ab
@@ -109,7 +112,6 @@ slots:
   
     cell_count:
         description: A count of all cells within a material entity.
-        slot_uri:
         examples:
             - value: '31497'
         range: integer
@@ -137,14 +139,12 @@ slots:
   
     molecular_function_purl:
         description: 
-        slot_uri:
         examples:
             - value: GO:0016218
         range: uriorcurie
   
     gene_id:
         description: An identifier for a gene.
-        slot_uri:
         examples:
             - value: HSPA1B
         identifier: true
@@ -157,15 +157,13 @@ slots:
         range: string
   
     variant_consequence_purl:
-        description: 
-        slot_uri:
+        description: A persistent URL that represents a type of variant consequence.
         examples:
             - value: SO:0000436
         range: uriorcurie
   
     biomarker_combination:
         description: A collection of biological entities that together can be used to identify some entity.
-        slot_uri:
         examples:
             - value: '[CCL21]'
         range: string
@@ -182,19 +180,111 @@ slots:
             - value: '[CCL21, PKHD1L1, SEMA3D, LYVE1, SEMA3A, PROX1, MMRN1, PPFIBP1, AKAP12, PDPN]'
         range: string
   
-    drug_product:
-        description: 
-        slot_uri:
+    drug_product_id:
+        description: An identifier for a drug compound.
         examples:
             - value: CHEMBL26
         identifier: true
         range: string
   
-    clinical_trial:
-        description: 
-        slot_uri:
+    study_id:
+        description: An identifier for a research study.
         examples:
             - value: NCT00494511
+        range: string
+
+    version:
+        description: An information content entity which is a sequence of characters borne by part of each of a class of manufactured products or its packaging and indicates its order within a set of other products having the same name.
+        slot_uri: IAO:0000129
+        examples:
+            - value: v0.1
+        range: string
+
+    dataset_collection_version:
+        description: The version number for a CellxGene data set collection.
+        examples:
+            - value: 2fd47593-5bcb-4b07-878f-263ad03f2206
+        range: string
+
+    year:
+        description: A numeric string that represents one calendar year.
+        examples:
+            - value: "2005"
+        range: string
+
+    title:
+        description: A word or phrase used as a name for some entity.
+        range: string
+
+    author_list:
+        description: A list of people who contributed to a publication.
+        slot_uri: IAO:0000321
+        range: string
+
+    pmcid:
+        description: An identifier curated by Pubmed Central for a publication.
+        examples:
+            - value: PMC10387117
+        range: string
+
+    pmid:
+        description: An identifier curated by Pubmed for a publication.
+        slot_uri: OBI:0001617
+        examples:
+            - value: "37516747"
+        range: string
+
+    journal_abbreviation:
+        description: A string that represents a shortened name for a journal.
+        examples:
+            - value: Nat Commun
+        range: string
+
+    citation:
+        description: A textual entity intended to identify a particular publication.
+        slot_uri: IAO:0000301
+        range: string
+
+    comment:
+        description: One or more statements that provide additional information about a resource.
+        slot_uri: rdfs:comment
+        range: string
+
+    recommended_name:
+        description: A name that a source prefers to use for an entity.
+        slot_uri: IAO:0000111
+        examples:
+            - value: 
+        range: string
+
+    exact_synonym:
+        description: An alternative label for a class or property which has the exact same meaning than the preferred name/primary label.
+        slot_uri: obo:hasExactSynonym
+        range: string
+
+    label:
+        description: The name for an entity.
+        slot_uri: rdfs:label
+        range: string
+
+    definition:
+        description: The official definition, explaining the meaning of a class or property.
+        slot_uri: IAO:0000115
+        range: string
+
+    source:
+        description: The resource from which some information, data, or knowledge originated.
+        slot_uri: dc:source
+        range: string
+
+    database_cross_reference:
+        description: An annotation property that links an ontology entity or a statement to a prefixed identifier or URI.
+        slot_uri: obo:hasDbXref
+        range: string
+
+    depiction:
+        description: An illustration of an entity.
+        slot_uri: foaf:depiction
         range: string
 
 classes:
@@ -216,7 +306,7 @@ classes:
             - biomarker_combination
             - binary_gene_combination
             - bag_of_genes
-            - gene
+            - gene_id
   
     CellType:
         description: "A material entity of anatomical origin (part of or deriving from an organism) that has as its parts a maximally connected cell compartment surrounded by a plasma membrane."
@@ -232,7 +322,7 @@ classes:
         description: "A region (or regions) that includes all of the sequence elements necessary to encode a functional transcript. A gene may include regulatory regions, transcribed regions and/or other functional sequence regions."
         class_uri: SO:0000704
         slots:
-            - gene
+            - gene_id
             - disease
             - mutation
             - variant_consequence
@@ -244,8 +334,8 @@ classes:
         slots:
             - drug_product
             - disease
-            - clinical_trial
-            - protein
+            - study
+            - protein_target
 
     AnatomicalStructure:
         description: "Material anatomical entity that is a single connected structure with inherent 3D shape generated by coordinated expression of the organism's own genome."
@@ -279,9 +369,9 @@ classes:
         description: "A data item that is an aggregate of other data items of the same type that have something in common. Averages and distributions can be determined for data sets."
         class_uri: IAO:0000100
         slots:
-            - identifier
+            - dataset_identifier
             - version
-            - collection_version
+            - dataset_collection_version
 
     Publication:
         description: "A document that is the output of a publishing process."
