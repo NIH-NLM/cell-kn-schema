@@ -1,19 +1,14 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A collection of cells that have some common property.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class CellSet  {
+public class CellSet {
 
   private String authorCellTerm;
   private String assay;

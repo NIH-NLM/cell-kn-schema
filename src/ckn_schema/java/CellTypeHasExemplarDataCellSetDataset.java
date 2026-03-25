@@ -1,19 +1,14 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A relationship between a cell type and a dataset in which some of the data exemplify the cell type.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class CellTypeHasExemplarDataCellSetDataset extends Association {
+public class CellTypeHasExemplarDataCellSetDataset extends Association<CellType, String, CellSetDataset> {
 
 
 }

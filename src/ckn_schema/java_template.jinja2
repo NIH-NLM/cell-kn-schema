@@ -1,0 +1,51 @@
+{#-
+  Jinja2 template for CKN Java classes.
+
+  Entity classes are generated normally with Lombok @Data.
+
+  The base Association class is generated with three generic type parameters
+  <S, P, O> for subject, predicate, and object.
+
+  Association subclasses extend Association<S, P, O> with concrete types
+  drawn from the slot_usage-refined ranges in cls.all_fields, so that
+  subject and object are strongly typed rather than left as String.
+-#}
+package {{ doc.package }};
+
+import java.util.List;
+import lombok.*;
+
+{% if cls.source_class.description %}/**
+  {{ cls.source_class.description }}
+**/{% endif %}
+@Data
+@EqualsAndHashCode(callSuper=false)
+{% if cls.name == "Association" -%}
+public{% if cls.abstract %} abstract{% endif %} class Association<S, P, O> {
+
+  private S subject;
+  private P predicate;
+  private O object;
+
+}
+{%- elif cls.is_a == "Association" -%}
+{%- set ns = namespace(subject_type="Object", predicate_type="String", object_type="Object") -%}
+{%- for f in cls.all_fields -%}
+  {%- if f.name == "subject" -%}{%- set ns.subject_type = f.range -%}{%- endif -%}
+  {%- if f.name == "predicate" -%}{%- set ns.predicate_type = f.range -%}{%- endif -%}
+  {%- if f.name == "object" -%}{%- set ns.object_type = f.range -%}{%- endif -%}
+{%- endfor -%}
+public class {{ cls.name }} extends Association<{{ ns.subject_type }}, {{ ns.predicate_type }}, {{ ns.object_type }}> {
+{% for f in cls.fields %}
+  private {{ f.range }} {{ f.name }};
+{%- endfor %}
+
+}
+{%- else -%}
+public{% if cls.abstract %} abstract{% endif %} class {{ cls.name }}{% if cls.is_a %} extends {{ cls.is_a }}{% endif %} {
+{% for f in cls.fields %}
+  private {{ f.range }} {{ f.name }};
+{%- endfor %}
+
+}
+{%- endif %}

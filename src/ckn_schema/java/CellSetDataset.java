@@ -1,19 +1,14 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A dataset that is about cells taken from one or more tissue samples.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class CellSetDataset  {
+public class CellSetDataset {
 
   private String datasetName;
   private String datasetIdentifier;

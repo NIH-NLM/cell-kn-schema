@@ -1,19 +1,14 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A region (or regions) that includes all of the sequence elements necessary to encode a functional transcript. A gene may include regulatory regions, transcribed regions and/or other functional sequence regions.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Gene  {
+public class Gene {
 
   private String geneSymbol;
   private String label;

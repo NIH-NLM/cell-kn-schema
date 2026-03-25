@@ -1,19 +1,14 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A collection of discontinuous sequences.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class BinaryGeneSet  {
+public class BinaryGeneSet {
 
   private String markers;
 

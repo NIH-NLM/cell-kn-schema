@@ -1,19 +1,14 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A material entity of anatomical origin (part of or deriving from an organism) that has as its parts a maximally connected cell compartment surrounded by a plasma membrane.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class CellType  {
+public class CellType {
 
   private String label;
   private String definition;

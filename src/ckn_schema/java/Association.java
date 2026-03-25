@@ -1,22 +1,17 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A typed association between two entities, linked by a predicate.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Association  {
+public class Association<S, P, O> {
 
-  private String subject;
-  private String predicate;
-  private String object;
+  private S subject;
+  private P predicate;
+  private O object;
 
 }

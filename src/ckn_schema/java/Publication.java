@@ -1,19 +1,14 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A document that is the output of a publishing process.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Publication  {
+public class Publication {
 
   private String year;
   private String title;

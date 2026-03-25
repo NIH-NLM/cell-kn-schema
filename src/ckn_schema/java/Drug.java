@@ -1,19 +1,14 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   A drug product that is bearer of a clinical drug role.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Drug  {
+public class Drug {
 
   private String name;
   private String disease;

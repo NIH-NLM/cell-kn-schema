@@ -1,19 +1,14 @@
-package None;
+package gov.nih.nlm.ckn;
 
 import java.util.List;
 import lombok.*;
-
-
-
-
-
 
 /**
   An amino acid chain that is canonically produced de novo by ribosome-mediated translation of a genetically-encoded mRNA, and any derivatives thereof.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Protein  {
+public class Protein {
 
   private String comment;
   private String label;

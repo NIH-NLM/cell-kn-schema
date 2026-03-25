@@ -18,7 +18,7 @@ gen-json-schema: copy-schema
 	gen-json-schema $(SCHEMA) > $(SRC)/jsonschema/ckn_schema.json
 
 gen-java: copy-schema
-	gen-java --output-directory $(SRC)/java $(SCHEMA)
+	gen-java --package gov.nih.nlm.ckn --template-file $(SRC)/java_template.jinja2 --output-directory $(SRC)/java $(SCHEMA)
 
 clean:
 	rm -f $(SRC)/schema/ckn_schema.yaml
