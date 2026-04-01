@@ -405,6 +405,26 @@ slots:
         description: An indication of the clinical trial phases a drug has successfully gone through.
         range: string
 
+    disease:
+        description: A disease associated with an entity.
+        range: string
+
+    annotation_score:
+        description: A score indicating the level of annotation for a protein.
+        range: integer
+
+    subject:
+        description: The subject of a triple.
+        range: string
+
+    predicate:
+        description: The predicate of a triple.
+        range: uriorcurie
+
+    object:
+        description: The object of a triple.
+        range: string
+
     ###############################################################################################################
     #####################################              Relations              #####################################
     ###############################################################################################################
@@ -494,9 +514,15 @@ slots:
         description: >-
             A relation that applies between a set of markers and a cell type that can be
             used to uniquely identify that cell type.
+        # Placeholder
+        exact_mappings:
+            - RO:0015005
 
     evaluated_in:
         description: A relation between a drug and some clinical trial it was tested in.
+        # Placeholder
+        exact_mappings:
+            - RO_0020325
 
     regulates_level_of:
         description: p regulates levels of c if p regulates some amount of c.
@@ -557,6 +583,9 @@ slots:
         description: >-
             A relation between a material entity and a drug such that the material entity
             changes some effect of the drug.
+        # Placeholder
+        exact_mappings:
+            - RO_0002027
 
     has_plasma_membrane_part:
         description: >-
@@ -630,6 +659,9 @@ slots:
         description: >-
             A relation between a disease and a material biological entity that has been
             altered.
+        # Placeholder
+        exact_mappings:
+            - RO_0004037
 
     exact_match:
         description: A mapping relation between two entities that are of the same type.
@@ -638,52 +670,15 @@ slots:
 
     subclass_of:
         description: A relation between a more specific class and a more general class.
+        # Placeholder
+        exact_mappings:
+            - rdfs:subClassOf
 
     has_quality:
         description: >-
             A relation between an entity and a quality inhering in it.
         exact_mappings:
             - RO:0000086
-
-    name:
-        description: The name of an entity.
-        range: string
-
-    disease:
-        description: A disease associated with an entity.
-        range: string
-
-    study:
-        description: A study associated with an entity.
-        range: string
-
-    protein_target:
-        description: A protein that is the target of a drug.
-        range: string
-
-    publication_doi_identifier:
-        description: A Digital Object Identifier for a publication.
-        range: doi
-
-    gene_name:
-        description: The name of a gene.
-        range: string
-
-    annotation_score:
-        description: A score indicating the level of annotation for a protein.
-        range: integer
-
-    subject:
-        description: The subject of a triple.
-        range: string
-
-    predicate:
-        description: The predicate of a triple.
-        range: uriorcurie
-
-    object:
-        description: The object of a triple.
-        range: string
 
 classes:
 
@@ -950,7 +945,6 @@ classes:
         class_uri: SO:0001059
         slots:
             - reference_sequence_identifier
-
 
     ###############################################################################################################
     #########################################          Triples           ##########################################
@@ -1852,11 +1846,9 @@ classes:
         slots:
             - source
 
-
     ###############################################################################################################
     #####################################          Not Yet in Graph           #####################################
     ###############################################################################################################
-
 
     # Assay:
     #     description: >-
