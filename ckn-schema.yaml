@@ -1576,22 +1576,22 @@ classes:
             - predicate
             - object
 
-    CellSetMemberOfCellSetDataset:
-        description: A relationship between a cell set and the dataset that contains data about it.
+    CellSetDatasetIsAboutCellSet:
+        description: A relationship between a cell set dataset and a cell set described in it.
         is_a: Association
         slot_usage:
             subject:
                 name: subject
-                description: A collection of cells that have some common property.
-                range: CellSet
-            predicate:
-                name: predicate
-                description: A mereological relation between a item and a collection.
-                subproperty_of: member_of
-            object:
-                name: object
                 description: A dataset that is about cells taken from one or more tissue samples.
                 range: CellSetDataset
+            predicate:
+                name: predicate
+                description: A primitive relation that relates an information artifact to an entity.
+                subproperty_of: is_about
+            object:
+                name: object
+                description: A collection of cells that have some common property.
+                range: CellSet
         defining_slots:
             - subject
             - predicate
@@ -1619,6 +1619,30 @@ classes:
                     given type and can be reliably used alone or in combination as a canonical
                     characteristic to optimally classify them.
                 range: BiomarkerCombination
+        defining_slots:
+            - subject
+            - predicate
+            - object
+
+    GenePartOfBinaryGeneSet:
+        description: A relationship between a gene and a binary gene set it is a member of.
+        is_a: Association
+        slot_usage:
+            subject:
+                name: subject
+                description: >-
+                    A region (or regions) that includes all of the sequence elements necessary to
+                    encode a functional transcript. A gene may include regulatory regions,
+                    transcribed regions and/or other functional sequence regions.
+                range: Gene
+            predicate:
+                name: predicate
+                description: A relation between a part and some whole entity.
+                subproperty_of: part_of
+            object:
+                name: object
+                description: A collection of discontinuous sequences.
+                range: BinaryGeneSet
         defining_slots:
             - subject
             - predicate
@@ -1743,34 +1767,6 @@ classes:
                 name: object
                 description: A collection of cells that have some common property.
                 range: CellSet
-        defining_slots:
-            - subject
-            - predicate
-            - object
-
-    BiomarkerCombinationSubclusterOfBinaryGeneSet:
-        description: >-
-            A relationship between a biomarker combination and a set of binary genes that
-            its members are a member of.
-        is_a: Association
-        slot_usage:
-            subject:
-                name: subject
-                description: >-
-                    A cell type marker gene is a gene that is selectively expressed in cells of a
-                    given type and can be reliably used alone or in combination as a canonical
-                    characteristic to optimally classify them.
-                range: BiomarkerCombination
-            predicate:
-                name: predicate
-                description: >-
-                    A relation between a group and another group it is part of but does not fully
-                    constitute.
-                subproperty_of: subcluster_of
-            object:
-                name: object
-                description: A collection of discontinuous sequences.
-                range: BinaryGeneSet
         defining_slots:
             - subject
             - predicate
@@ -1921,7 +1917,7 @@ classes:
             - predicate
             - object
 
-    CellSetExpressesGene:
+    CellSetSelectivelyExpressesGene:
         description: A relationship between a cell set and a gene that it expresses.
         is_a: Association
         slot_usage:
@@ -1932,9 +1928,10 @@ classes:
             predicate:
                 name: predicate
                 description: >-
-                    relation between some biological entity and a gene that is the input of some
-                    gene expression process
-                subproperty_of: expresses
+                    A relation between a cell type and a gene such that the gene is transcribed
+                    at a significantly higher level in that cell type relative to other cell types,
+                    and can be used as a marker for the cell type.
+                subproperty_of: selectively_expresses
             object:
                 name: object
                 description: >-
