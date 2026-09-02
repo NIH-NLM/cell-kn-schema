@@ -566,7 +566,7 @@ slots:
 
     mean_binary_score:
         description: The mean of binary scores for genes in a binary gene set.
-        range: integer
+        range: float
 
     donor_age:
         description: The age of one or more donors from which cell set samples were taken from.
