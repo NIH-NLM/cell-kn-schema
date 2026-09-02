@@ -514,6 +514,7 @@ slots:
 
     cluster_summary:
         description: Count of clusters in this dataset.
+        range: integer
 
     cluster_cell_count:
         description: Count of cells in the cluster post-filtering.
@@ -562,6 +563,15 @@ slots:
     recall:
         description: The number of true positives out of all possible positive values.
         range: float
+
+    mean_binary_score:
+        description: The mean of binary scores for genes in a binary gene set.
+        range: float
+
+    donor_age:
+        description: The age of one or more donors from which cell set samples were taken from.
+        range: string
+        slot_uri: HsapDv:0000000
 
     ###############################################################################################################
     #####################################              Relations              #####################################
@@ -833,6 +843,10 @@ slots:
         exact_mappings:
             - PROV:wasAttributedTo
 
+    has_binary_gene_set:
+        description: A relation between a cell or cell set and a set of binary genes it expresses.
+
+
 classes:
 
     Association:
@@ -851,7 +865,8 @@ classes:
         description: A collection of cells that have some common property.
         slots:
             - author_cell_term
-            - assay # Should be on edges between dataset and specimen/anatomical entity, and pulled into the Cell_set node
+            - assay
+            - donor_age
             - ontology_purl
             - anatomical_structure
             - species
@@ -879,7 +894,6 @@ classes:
             - false_negative
             - false_positive
             - on_target
-            - f_beta_score
             - precision
             - recall
         slot_usage:
@@ -971,6 +985,8 @@ classes:
             - dataset_name
             - dataset_identifier
             - species
+            - assay
+            - donor_age
             - version
             - dataset_identifier
             - dataset_collection_version
@@ -1053,6 +1069,7 @@ classes:
         class_uri: SO:0001260
         slots:
             - markers
+            - mean_binary_score
 
     ClinicalTrial:
         description: A clinical investigation that involves an intervention.
@@ -1772,7 +1789,7 @@ classes:
             - predicate
             - object
 
-    CellSetExpressesBinaryGeneSet:
+    CellSetHasBinaryGeneSetBinaryGeneSet:
         description: A relationship between a cell set and a set of binary genes that it expresses.
         is_a: Association
         slot_usage:
@@ -1783,9 +1800,8 @@ classes:
             predicate:
                 name: predicate
                 description: >-
-                    relation between some biological entity and a gene that is the input of some
-                    gene expression process
-                subproperty_of: expresses
+                    A relation between a cell or cell set and a set of binary genes it expresses.
+                subproperty_of: has_binary_gene_set
             object:
                 name: object
                 description: A collection of discontinuous sequences.
