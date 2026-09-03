@@ -19,15 +19,34 @@ dev = [
     "rdflib",
 ]
 
+# Mirrors the dev extra above. uv syncs dependency groups by default but not
+# extras, so the Makefile's "uv run gen-*" targets need linkml here to resolve
+# from the lock; the extra is kept so "pip install ckn-schema[dev]" still works.
+[dependency-groups]
+dev = [
+    "linkml>=1.8,<2",
+    "jsonschema",
+    "rdflib",
+]
+
 [tool.hatch.version]
 source = "vcs"
 
 [tool.hatch.publish.index.repos.github-publish]
 url = "https://upload.pkg.github.com/orgs/NIH-NLM/packages/pypi/ckn-schema/"
 
+[tool.hatch.build.targets.sdist]
+artifacts = [
+  "src/ckn_schema/pydantic/ckn_schema.py",
+  "src/ckn_schema/schema/ckn_schema.yaml",
+  "src/ckn_schema/shacl/ckn_schema.shacl.ttl",
+  "src/ckn_schema/jsonschema/ckn_schema.json",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/ckn_schema"]
 artifacts = [
+  "src/ckn_schema/pydantic/ckn_schema.py",
   "src/ckn_schema/schema/ckn_schema.yaml",
   "src/ckn_schema/shacl/ckn_schema.shacl.ttl",
   "src/ckn_schema/jsonschema/ckn_schema.json",

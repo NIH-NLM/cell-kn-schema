@@ -27,9 +27,7 @@ jobs:
         run: make
 
       - name: Build package
-        run: |
-          pip install build hatch-vcs
-          python -m build
+        run: uv build
 
       - name: Attach to release
         run: gh release upload "${{ github.ref_name }}" dist/*
