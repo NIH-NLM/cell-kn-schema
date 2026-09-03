@@ -19,6 +19,16 @@ dev = [
     "rdflib",
 ]
 
+# Mirrors the dev extra above. uv syncs dependency groups by default but not
+# extras, so the Makefile's "uv run gen-*" targets need linkml here to resolve
+# from the lock; the extra is kept so "pip install ckn-schema[dev]" still works.
+[dependency-groups]
+dev = [
+    "linkml>=1.8,<2",
+    "jsonschema",
+    "rdflib",
+]
+
 [tool.hatch.version]
 source = "vcs"
 
