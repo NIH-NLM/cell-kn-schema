@@ -845,6 +845,10 @@ slots:
 
     has_binary_gene_set:
         description: A relation between a cell or cell set and a set of binary genes it expresses.
+        # Placeholder — RO_0015013 does not exist in RO; using as a project-local term. Chosen
+        # adjacent to RO_0015004, "has characterizing marker set", the closest published relation.
+        exact_mappings:
+            - RO:0015013
 
 
 classes:
@@ -1789,6 +1793,8 @@ classes:
             - predicate
             - object
 
+    # Association classes are named subject + predicate + object, so the repeated "BinaryGeneSet"
+    # here is correct: CellSet + HasBinaryGeneSet + BinaryGeneSet. Do not shorten it.
     CellSetHasBinaryGeneSetBinaryGeneSet:
         description: A relationship between a cell set and a set of binary genes that it expresses.
         is_a: Association
